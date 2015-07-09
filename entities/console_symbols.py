@@ -14,6 +14,7 @@ class CCol:
     DARK_GREY = '\033[90m'
     LIGHT_GREY = '\033[37m'
     WHITE = '\033[97m'
+    LIGHT_CYAN = '\033[96m'
 
 # Weather symbols
 class W:

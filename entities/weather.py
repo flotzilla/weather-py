@@ -33,6 +33,16 @@ class Weather:
         w = self.weather['main']['pressure']
         return CCol.LIGHT_GREY + 'Pressure: ' + str(w) + ' hPa' + CCol.END
 
+    def get_wind(self):
+        if self.weather['wind'] is not None:
+            wind = self.weather['wind']
+            if 'deg' in wind.keys():
+                return CCol.LIGHT_CYAN + 'Wind: ' + str(wind['speed']) + ' m/s ' \
+                       + CCol.WHITE + 'Direction: ' \
+                       + format(self.parse_wind(wind['deg'])) + CCol.END
+            else:
+                return CCol.LIGHT_CYAN + 'Wind: ' + str(wind['speed']) + ' m/s ' + CCol.END
+
     @staticmethod
     def parse_temp(temp):
         if temp <= 0:
@@ -62,3 +72,19 @@ class Weather:
             return CCol.WHITE + W.cloud
         else:
             return ""
+
+    @staticmethod
+    def parse_wind(direction):
+        # return direction
+        int_direction = int(direction)
+        # int_direction = '{:<10d}'.format(direction)
+        if 315 > int_direction or int_direction < 45:
+            return 'North'
+        elif 45 < int_direction < 135:
+            return 'East'
+        elif 135 < int_direction < 225:
+            return 'South'
+        elif 225 < int_direction < 315:
+            return 'West'
+        else:
+            return Weather.parse_wind(int_direction % 360)

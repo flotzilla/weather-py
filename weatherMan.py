@@ -30,19 +30,19 @@ def create_output(place):
                  + w.get_weather() + separator
                  + w.get_temp() + separator
                  + w.get_humidity() + separator
-                 + w.get_pressure() + separator)
+                 + w.get_pressure() + separator
+                 + w.get_wind() + separator)
 
     lines = ' ' + CCol.WHITE
 
     # create normal look-likes dash line (like beauty) according to size of answer
-    if len(string) == 153:
-        len_str = 70
-    else:
-        if len(string) % 2 == 0:
-            # pretty weird but works
-            len_str = int(len(string) / 2 - ((len(string) + 2) % 70) + 2)
-        else:
-            len_str = int((len(string) - 1) / 2 - ((len(string) + 2) % 70) + 2)
+    # if len(string) % 2 == 0:
+    #     # pretty weird but works
+    #     len_str = int(len(string) / 2 - ((len(string) + 2) % 70) + 2)
+    # else:
+    #     len_str = int((len(string) - 1) / 2 - ((len(string) + 1) % 70) + 2)
+
+    len_str = 103
 
     for i in range(0, len_str):
         lines += str('-')
