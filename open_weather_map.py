@@ -9,7 +9,7 @@ import json
 # Open weather map
 class Owm:
     __API_KEY = None
-    __default_city = 'Kherson'
+    __default_city = ''
     __main_href = 'api.openweathermap.org'
     __weather_req = '/data/2.5/weather?q='
     __forecast_req = '/data/2.5/forecast?q='
@@ -25,10 +25,10 @@ class Owm:
             conn = HTTPConnection(self.__main_href)
             conn.request("GET", self.__weather_req + self.__default_city + self.__def_metric)
             resp = conn.getresponse()
-            # conn.close()
             if resp.status == 200:
                 answer = json.loads(resp.read().decode("utf-8"))
                 w = Weather(answer)
+                conn.close()
             else:
                 print(resp.status)
         except HTTPException as err:

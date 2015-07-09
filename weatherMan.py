@@ -5,7 +5,7 @@ from entities.console_symbols import CCol
 import sys
 
 # set your api key on openwethermap.org
-api_key = API_key = 'a145b2b312afcb6f0890014b772665b7'
+api_key = 'a145b2b312afcb6f0890014b772665b7'
 default_place = 'Kherson'
 
 
@@ -33,7 +33,6 @@ def create_output(place):
                  + w.get_pressure() + separator)
 
     lines = ' ' + CCol.WHITE
-    len_str = 70
 
     # create normal look-likes dash line (like beauty) according to size of answer
     if len(string) == 153:
@@ -41,9 +40,9 @@ def create_output(place):
     else:
         if len(string) % 2 == 0:
             # pretty weird but works
-            len_str = int(len(string) / 2 - ((len(string)+2) % 70) + 2)
+            len_str = int(len(string) / 2 - ((len(string) + 2) % 70) + 2)
         else:
-            len_str = int((len(string) - 1) / 2 - ((len(string)+2) % 70)+2)
+            len_str = int((len(string) - 1) / 2 - ((len(string) + 2) % 70) + 2)
 
     for i in range(0, len_str):
         lines += str('-')
@@ -54,7 +53,15 @@ def create_output(place):
 
 
 if len(sys.argv) > 1:
-    if 122 >= ord(sys.argv[1][0]) > 65:
+    isEng = False
+    for i in range(0, len(sys.argv[1])):
+        if 122 >= ord(sys.argv[1][i]) > 65:
+            isEng = True
+        else:
+            isEng = False
+            break
+
+    if isEng:
         create_output(sys.argv[1])
     else:
         print("English motherfucker, do you speak it?")
