@@ -15,13 +15,9 @@ class Owm:
     __forecast_req = '/data/2.5/forecast?q='
     __def_metric = '&units=metric'
 
-    def __init__(self, API_KEY):
+    def __init__(self, API_KEY, city):
         self.__API_KEY = API_KEY
-
-    @classmethod
-    def init_with_city(cls, API_KEY, city):
-        cls.__default_city = API_KEY
-        cls.__default_city = city
+        self.__default_city = city
 
     def get_weather(self):
         w = None
@@ -32,8 +28,9 @@ class Owm:
             # conn.close()
             if resp.status == 200:
                 answer = json.loads(resp.read().decode("utf-8"))
-                # print(answer)
                 w = Weather(answer)
+            else:
+                print(resp.status)
         except HTTPException as err:
             print(err)
 
