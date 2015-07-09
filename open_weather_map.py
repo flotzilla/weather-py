@@ -2,6 +2,8 @@ __author__ = 'bitybyte'
 
 from http.client import HTTPConnection
 from http.client import HTTPException
+from entities.weather import Weather
+from entities.forecast import Forecast
 import json
 
 # Open weather map
@@ -17,30 +19,34 @@ class Owm:
         self.__API_KEY = API_KEY
 
     @classmethod
-    def init_with_City(cls, API_KEY, city):
+    def init_with_city(cls, API_KEY, city):
         cls.__default_city = API_KEY
         cls.__default_city = city
 
     def get_weather(self):
-        rez = None
+        w = None
         try:
-            conn = HTTPConnection('api.openweathermap.org')
-            conn.request("GET", self.__weather_req + self.__default_city  + self.__def_metric)
-            rez = json.loads(conn.getresponse().read().decode("utf-8"))
-            conn.close()
-        except HTTPConnection as err:
-            print('Cannot connect to server')
+            conn = HTTPConnection(self.__main_href)
+            conn.request("GET", self.__weather_req + self.__default_city + self.__def_metric)
+            resp = conn.getresponse()
+            # conn.close()
+            if resp.status == 200:
+                answer = json.loads(resp.read().decode("utf-8"))
+                # print(answer)
+                w = Weather(answer)
+        except HTTPException as err:
+            print(err)
 
-        return rez
+        return w
 
     def get_forecast(self):
-        rez = None
+        f = None
         try:
-            conn = HTTPConnection('api.openweathermap.org')
-            conn.request("GET", self.__forecast_req + self.__default_city  + self.__def_metric)
-            rez = json.loads(conn.getresponse().read().decode("utf-8"))
+            conn = HTTPConnection(self.__main_href)
+            conn.request("GET", self.__forecast_req + self.__default_city + self.__def_metric)
+            f = Forecast(json.loads(conn.getresponse().read().decode("utf-8")))
             conn.close()
         except HTTPConnection as err:
             print('Cannot connect to server')
 
-        return rez
+        return f

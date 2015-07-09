@@ -1,7 +1,7 @@
 __author__ = 'bitybyte'
 
-from console_symbols import CCol
-from console_symbols import W
+from entities.console_symbols import CCol
+from entities.console_symbols import W
 from open_weather_map import Owm
 
 api_key = API_key = 'a145b2b312afcb6f0890014b772665b7'
@@ -16,4 +16,5 @@ print(CCol.YELLOW + W.umbrella + CCol.END)
 print(CCol.BOLD + W.umbrella2 + CCol.END)
 
 owm = Owm(api_key)
-print(owm.get_weather())
+w = owm.get_weather()
+print(w.get_temp())
