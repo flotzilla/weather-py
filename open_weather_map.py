@@ -23,7 +23,8 @@ class Owm:
         w = None
         try:
             conn = HTTPConnection(self.__main_href)
-            conn.request("GET", self.__weather_req + self.__default_city + self.__def_metric)
+            conn.request("GET",  self.__weather_req + self.__default_city + self.__def_metric
+                         + '&APPID' + self.__API_KEY )
             resp = conn.getresponse()
             if resp.status == 200:
                 answer = json.loads(resp.read().decode("utf-8"))
