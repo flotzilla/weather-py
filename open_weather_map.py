@@ -33,7 +33,10 @@ class Owm:
             else:
                 print(resp.status)
         except HTTPException as err:
-            print(err)
+            # print(err)
+            print('Http exception')
+        except Exception as ex:
+            print('Something goes wrong')
 
         return w
 
