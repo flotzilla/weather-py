@@ -70,6 +70,8 @@ class Weather:
             return CCol.WHITE + W.snowman
         elif weather.lower() == 'clouds':
             return CCol.WHITE + W.cloud
+        elif weather.lower() == 'thunderstorm':
+            return CCol.BLUE + W.umbrella2
         else:
             return ""
 
@@ -77,8 +79,7 @@ class Weather:
     def parse_wind(direction):
         # return direction
         int_direction = int(direction)
-        # int_direction = '{:<10d}'.format(direction)
-        if 315 > int_direction or int_direction < 45:
+        if (315 < int_direction < 360) or int_direction < 45:
             return 'North'
         elif 45 < int_direction < 135:
             return 'East'
@@ -87,4 +88,5 @@ class Weather:
         elif 225 < int_direction < 315:
             return 'West'
         else:
-            return Weather.parse_wind(int_direction % 360)
+            return direction
+            # return Weather.parse_wind(int_direction % 360)

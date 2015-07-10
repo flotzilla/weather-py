@@ -24,3 +24,4 @@ class W:
     umbrella = u'\u2602'
     umbrella2 = u'\u2614'
     snowman = u'\u2603'
+    rain = u'\u26C6'
