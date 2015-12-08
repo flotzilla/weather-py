@@ -24,7 +24,7 @@ class Owm:
         try:
             conn = HTTPConnection(self.__main_href)
             conn.request("GET",  self.__weather_req + self.__default_city + self.__def_metric
-                         + '&APPID' + self.__API_KEY )
+                         + '&appid=' + self.__API_KEY)
             resp = conn.getresponse()
             if resp.status == 200:
                 answer = json.loads(resp.read().decode("utf-8"))
@@ -33,10 +33,11 @@ class Owm:
             else:
                 print(resp.status)
         except HTTPException as err:
-            # print(err)
-            print('Http exception')
+            print('Http exception', err)
+            raise
         except Exception as ex:
-            print('Something goes wrong')
+            print('Something goes wrong', ex)
+            raise
 
         return w
 

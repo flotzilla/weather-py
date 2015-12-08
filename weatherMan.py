@@ -5,7 +5,7 @@ from entities.console_symbols import CCol
 import sys
 
 # set your api key on openwethermap.org
-api_key = 'a145b2b312afcb6f0890014b772665b7'
+api_key = '4fd151fccf0e90caa48695350676eaa2'
 default_place = 'Kherson'
 
 
@@ -14,7 +14,11 @@ def create_output(place):
         owm = Owm(api_key, default_place)
     else:
         owm = Owm(api_key, place)
-    w = owm.get_weather()
+    w = None
+    try:
+        w = owm.get_weather()
+    except Exception as x:
+        print(x)
 
     if w is None or w == 'error':
         print('Error. Cannot get information from openweather')
