@@ -39,13 +39,6 @@ def create_output(place):
 
     lines = ' ' + CCol.WHITE
 
-    # create normal look-likes dash line (like beauty) according to size of answer
-    # if len(string) % 2 == 0:
-    #     # pretty weird but works
-    #     len_str = int(len(string) / 2 - ((len(string) + 2) % 70) + 2)
-    # else:
-    #     len_str = int((len(string) - 1) / 2 - ((len(string) + 1) % 70) + 2)
-
     len_str = 103
 
     for i in range(0, len_str):
